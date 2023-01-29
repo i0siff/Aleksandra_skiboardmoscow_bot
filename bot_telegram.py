@@ -109,12 +109,10 @@ chat_1 = int(-1001808461901)
 async def new_members_handler(message : types.Message):
     if message.chat.id == chat_1:
         name = message.new_chat_members[0]
-#      await bot.reply(message.chat.id, f"Добро пожаловать, {name.mention}!. В чат 2222")
         await message.delete()
         await bot.send_message(message.chat.id, f' <a href="tg://user?id={message.new_chat_members[0].id}">{message.new_chat_members[0].first_name}</a>, Добро пожаловать!👋 \n \n👇 Правила чата и полезное здесь 👇 \n https://t.me/skiboardSOROCHANY/188360 ' , disable_web_page_preview=True,  parse_mode='html')
         
     elif message.chat.id == chat_id_skiboardSWIM:
- #     name = message.new_chat_members[0]
         await message.delete()
         await bot.send_message(message.chat.id, f'Добро пожаловать, <a href="tg://user?id={message.new_chat_members[0].id}">{message.new_chat_members[0].first_name}</a>, в чат! 🤗 \nНам будет интересно немного узнать о Вас ☺️ и о Ваших взаимных «отношениях» с плаванием 🏊🏻‍♀️🏊🏻' ,  parse_mode='html')
     elif message.chat.id == chat_id_skiboardSOROCHANY:
