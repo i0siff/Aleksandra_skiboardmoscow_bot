@@ -49,12 +49,30 @@ async def process_start_command(message: types.Message):
    #  form_msg_9 = '9. На чём катаешь: 🏂или⛷?'
    #  form_msg_10 = '10. Другие твои спортивные активности и хобби.'
    #  form_msg_11 = '11. Где конкретно узнал(а) про чат?'
+
+
+# Hello_msg_1 = "Привет," +message.chat.first_name+ ", добро пожаловать в Лыжебордеры Москва. 👋 \n \n"
+# Hello_msg_2 = "Многие не занимаются активностями только потому, что не могут найти компанию, а одному страшно, скучно или просто лень. Если ты из Москвы, то Telegram сообщество @SKIBOARDMOSCOW — это место, где легко найти компанию для любых зимних и летних увлечений.  \n \n"
+# Hello_msg_3 = "Это самое большое сообщество горнолыжников и сноубордистов Москвы в Telegram. Более 8000 участников, 80 тематических чатов, 365 событий в году и горы энергии! 2017©️  \n \n"
+# Hello_msg_4 = "t.me/skiboardAFISHA \nt.me/skiboardINFO \n \n"
+# Hello_msg_5 = "inst (https://instagram.com/skiboardmoscow) / VK (https://vk.com/skiboardmoscow) / YouTube (https://youtube.com/channel/UCT-Po85wfHsiNptzpm6aRfw) - skiboardmoscow \n \n"
+# Hello_msg_6 = "👍 Люди поддерживают такие некоммерческие сообщества, т.к. они способствуют снижению порога входа в спорт для человека «с улицы» и сплочают людей, снимают барьеры общения."
+
+
+
+
+
     
 
     await message.answer('Привет, ' +message.chat.first_name+ ' \nДобро пожаловать в секту =) ⛷🏂  \nПомни, не важно лыжник ты или сноубордист, главное, что Лыжебордер! 2017 ©', reply_markup=kb.Start_kb_markup1)
     #await bot.send_message(message.from_user.id, first_msg_1 + "\n" + first_msg_2 + "\n" + first_msg_3 + "\n \n" + form_msg_1 + "\n" + form_msg_2 + "\n" + form_msg_3 + "\n" + form_msg_4 + "\n" + form_msg_5 + "\n" + form_msg_6 + "\n" + form_msg_7 + "\n" + form_msg_8 + "\n" + form_msg_9 + "\n" + form_msg_10 + "\n" + form_msg_11 + "\n")
     #await message.answer(start_msg_1, parse_mode=ParseMode.MARKDOWN)
     await bot.send_message(message.from_user.id, "Понравился бот? \nХотите себе такого же? \n\nНапишите @i0siff - он поможет с разработкой ботов")
+
+@dp.message_handler(commands=['warn'], is_chat_admin=True)
+async def mute(message):
+    await message.reply("Предупреждение \nЗа флуд и нескончаемые сообщениия не по теме чата.\nПосле двух предупреждений - в бан ❗️🔞")
+
 
 	
 @dp.message_handler(commands=['mute'], is_chat_admin=True)
@@ -109,20 +127,20 @@ chat_1 = int(-1001808461901)
 async def new_members_handler(message : types.Message):
     if message.chat.id == chat_1:
         name = message.new_chat_members[0]
+#      await bot.reply(message.chat.id, f"Добро пожаловать, {name.mention}!. В чат 2222")
         await message.delete()
         await bot.send_message(message.chat.id, f' <a href="tg://user?id={message.new_chat_members[0].id}">{message.new_chat_members[0].first_name}</a>, Добро пожаловать!👋 \n \n👇 Правила чата и полезное здесь 👇 \n https://t.me/skiboardSOROCHANY/188360 ' , disable_web_page_preview=True,  parse_mode='html')
         
     elif message.chat.id == chat_id_skiboardSWIM:
+ #     name = message.new_chat_members[0]
         await message.delete()
         await bot.send_message(message.chat.id, f'Добро пожаловать, <a href="tg://user?id={message.new_chat_members[0].id}">{message.new_chat_members[0].first_name}</a>, в чат! 🤗 \nНам будет интересно немного узнать о Вас ☺️ и о Ваших взаимных «отношениях» с плаванием 🏊🏻‍♀️🏊🏻' ,  parse_mode='html')
     elif message.chat.id == chat_id_skiboardSOROCHANY:
         await message.delete()
         await bot.send_message(message.chat.id, f' <a href="tg://user?id={message.new_chat_members[0].id}">{message.new_chat_members[0].first_name}</a>, Добро пожаловать!👋 \n \nПравила чата и полезное здесь👇 \n https://t.me/skiboardSOROCHANY/188360 ' , disable_web_page_preview=True,  parse_mode='html')
-# 
-#     else:
-#      name = message.new_chat_members[0]
-#      await message.reply(message.chat.id, f"Добро пожаловать, {name.mention}!")
-#      await bot.send_message(message.chat.id, f"Добро пожаловать, {name.mention}!")
+    else:
+#       await message.delete()
+        await bot.send_message(message.chat.id, f' <a href="tg://user?id={message.new_chat_members[0].id}">{message.new_chat_members[0].first_name}</a>, Добро пожаловать!👋 ' , disable_web_page_preview=True,  parse_mode='html')
 
 
 
