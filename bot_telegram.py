@@ -62,6 +62,17 @@ async def process_start_command(message: types.Message):
 
 
 
+ #Info_msg_1 = f"📌 Правила сообщества и ссылки на чаты находятся в закрепе @skiboardmoscow \n"
+ #Info_msg_1 += f"❗️Инфо чат: @skiboardINFO  \n"
+ #Info_msg_1 += f"❗️Афиша: @skiboardAFISHA \n"
+ #Info_msg_1 += f"❗️Медиа: @skiboardMEDIA \n"
+ #Info_msg_1 += f"Instagram.com/skiboardmoscow \n"
+ #Info_msg_1 += f"vk.ru/skiboardmoscow \n"
+
+
+
+
+
     
 
     await message.answer('Привет, ' +message.chat.first_name+ ' \nДобро пожаловать в секту =) ⛷🏂  \nПомни, не важно лыжник ты или сноубордист, главное, что Лыжебордер! 2017 ©', reply_markup=kb.Start_kb_markup1)
@@ -120,6 +131,7 @@ async def kb_ChatsByTopic(message: types.Message):
 
 chat_id_skiboardSWIM = int(-1001589723428)
 chat_id_skiboardSOROCHANY = int(-1001184019127)
+chat_id_skiboardSTEPANOVO = int(-1001397230854)
 chat_1 = int(-1001808461901)
 
 #Приветствие
@@ -132,12 +144,14 @@ async def new_members_handler(message : types.Message):
         await bot.send_message(message.chat.id, f' <a href="tg://user?id={message.new_chat_members[0].id}">{message.new_chat_members[0].first_name}</a>, Добро пожаловать!👋 \n \n👇 Правила чата и полезное здесь 👇 \n https://t.me/skiboardSOROCHANY/188360 ' , disable_web_page_preview=True,  parse_mode='html')
         
     elif message.chat.id == chat_id_skiboardSWIM:
- #     name = message.new_chat_members[0]
-        await message.delete()
+#        await message.delete()
         await bot.send_message(message.chat.id, f'Добро пожаловать, <a href="tg://user?id={message.new_chat_members[0].id}">{message.new_chat_members[0].first_name}</a>, в чат! 🤗 \nНам будет интересно немного узнать о Вас ☺️ и о Ваших взаимных «отношениях» с плаванием 🏊🏻‍♀️🏊🏻' ,  parse_mode='html')
     elif message.chat.id == chat_id_skiboardSOROCHANY:
-        await message.delete()
+#        await message.delete()
         await bot.send_message(message.chat.id, f' <a href="tg://user?id={message.new_chat_members[0].id}">{message.new_chat_members[0].first_name}</a>, Добро пожаловать!👋 \n \nПравила чата и полезное здесь👇 \n https://t.me/skiboardSOROCHANY/188360 ' , disable_web_page_preview=True,  parse_mode='html')
+    elif message.chat.id == chat_id_skiboardSTEPANOVO:
+#        await message.delete()
+        await bot.send_message(message.chat.id, f' <a href="tg://user?id={message.new_chat_members[0].id}">{message.new_chat_members[0].first_name}</a>, Добро пожаловать!👋 \n \nПравила чата и полезное здесь👇 \n https://t.me/skiboardSTEPANOVO/51102 ' , disable_web_page_preview=True,  parse_mode='html')
     else:
 #       await message.delete()
         await bot.send_message(message.chat.id, f' <a href="tg://user?id={message.new_chat_members[0].id}">{message.new_chat_members[0].first_name}</a>, Добро пожаловать!👋 ' , disable_web_page_preview=True,  parse_mode='html')
