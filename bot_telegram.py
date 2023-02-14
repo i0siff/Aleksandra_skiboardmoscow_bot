@@ -12,7 +12,7 @@ from aiogram.types import ParseMode
 #import config
 #import logging
 #import aiogram
-#import asyncio
+import asyncio
 
 import os, json, string
 import keyboards as kb
@@ -120,7 +120,7 @@ async def kb_moscow(message: types.Message):
 
 @dp.message_handler(lambda message: message.text=="Большие курорты")
 async def kb_BigResorts(message: types.Message):
-    await message.answer("Большие курорты:", reply_markup=kb.inline_kb_BigResorts)                 
+    await message.answer("Большие курорты:", reply_markup=kb.inline_kb_BigResorts)
 
 @dp.message_handler(lambda message: message.text=="Чаты по темам")
 async def kb_ChatsByTopic(message: types.Message):
@@ -141,20 +141,28 @@ async def new_members_handler(message : types.Message):
         name = message.new_chat_members[0]
 #      await bot.reply(message.chat.id, f"Добро пожаловать, {name.mention}!. В чат 2222")
         await message.delete()
-        await bot.send_message(message.chat.id, f' <a href="tg://user?id={message.new_chat_members[0].id}">{message.new_chat_members[0].first_name}</a>, Добро пожаловать!👋 \n \n👇 Правила чата и полезное здесь 👇 \n https://t.me/skiboardSOROCHANY/188360 ' , disable_web_page_preview=True,  parse_mode='html')
+        new_chat_members_message = await bot.send_message(message.chat.id, f' <a href="tg://user?id={message.new_chat_members[0].id}">{message.new_chat_members[0].first_name}</a>, приветствуем! 👋 Смотри, что у нас есть: \nhttps://t.me/skiboardAFISHA/1399 ' , disable_web_page_preview=True,  parse_mode='html')
         
     elif message.chat.id == chat_id_skiboardSWIM:
 #        await message.delete()
-        await bot.send_message(message.chat.id, f'Добро пожаловать, <a href="tg://user?id={message.new_chat_members[0].id}">{message.new_chat_members[0].first_name}</a>, в чат! 🤗 \nНам будет интересно немного узнать о Вас ☺️ и о Ваших взаимных «отношениях» с плаванием 🏊🏻‍♀️🏊🏻' ,  parse_mode='html')
+        new_chat_members_message = await bot.send_message(message.chat.id, f'Добро пожаловать, <a href="tg://user?id={message.new_chat_members[0].id}">{message.new_chat_members[0].first_name}</a>, в чат! 🤗 \nНам будет интересно немного узнать о Вас ☺️ и о Ваших взаимных «отношениях» с плаванием 🏊🏻‍♀️🏊🏻' ,  parse_mode='html')
+        await asyncio.sleep(1800)
+        await new_chat_members_message.delete()
     elif message.chat.id == chat_id_skiboardSOROCHANY:
 #        await message.delete()
-        await bot.send_message(message.chat.id, f' <a href="tg://user?id={message.new_chat_members[0].id}">{message.new_chat_members[0].first_name}</a>, Добро пожаловать!👋 \n \nПравила чата и полезное здесь👇 \n https://t.me/skiboardSOROCHANY/188360 ' , disable_web_page_preview=True,  parse_mode='html')
+        new_chat_members_message = await bot.send_message(message.chat.id, f' <a href="tg://user?id={message.new_chat_members[0].id}">{message.new_chat_members[0].first_name}</a>, Добро пожаловать!👋 \n \nПравила чата и полезное здесь👇 \n https://t.me/skiboardSOROCHANY/188360 ' , disable_web_page_preview=True,  parse_mode='html')
+        await asyncio.sleep(1800)
+        await new_chat_members_message.delete()
     elif message.chat.id == chat_id_skiboardSTEPANOVO:
 #        await message.delete()
-        await bot.send_message(message.chat.id, f' <a href="tg://user?id={message.new_chat_members[0].id}">{message.new_chat_members[0].first_name}</a>, Добро пожаловать!👋 \n \nПравила чата и полезное здесь👇 \n https://t.me/skiboardSTEPANOVO/51102 ' , disable_web_page_preview=True,  parse_mode='html')
+        new_chat_members_message = await bot.send_message(message.chat.id, f' <a href="tg://user?id={message.new_chat_members[0].id}">{message.new_chat_members[0].first_name}</a>, Добро пожаловать!👋 \n \nПравила чата и полезное здесь👇 \n https://t.me/skiboardSTEPANOVO/51102 ' , disable_web_page_preview=True,  parse_mode='html')
+        await asyncio.sleep(1800)
+        await new_chat_members_message.delete()
     else:
 #       await message.delete()
-        await bot.send_message(message.chat.id, f' <a href="tg://user?id={message.new_chat_members[0].id}">{message.new_chat_members[0].first_name}</a>, Добро пожаловать!👋 ' , disable_web_page_preview=True,  parse_mode='html')
+        new_chat_members_message = await bot.send_message(message.chat.id, f' <a href="tg://user?id={message.new_chat_members[0].id}">{message.new_chat_members[0].first_name}</a>, приветствуем! 👋 Смотри, что у нас есть: \nhttps://t.me/skiboardAFISHA/1399 ' , disable_web_page_preview=True,  parse_mode='html')
+        await asyncio.sleep(1800)
+        await new_chat_members_message.delete()
 
 
 
@@ -168,8 +176,9 @@ async def new_members_handler(message : types.Message):
 async def echo_send(message : types.Message):
     if {i.lower().translate(str.maketrans('', '', string.punctuation)) for i in message.text.split(' ')}\
         .intersection(set(json.load(open('cenz.json')))) != set():
-        await message.reply('МАТ ЗАПРЕЩЁН!\nСмотри правила:\nt.me/skiboardAFISHA/985', disable_web_page_preview=True)
+        cenz_message = await message.reply('МАТ ЗАПРЕЩЁН!\nСмотри правила:\nt.me/skiboardAFISHA/985', disable_web_page_preview=True)
         await message.delete()
-
+        await asyncio.sleep(30)
+        await cenz_message.delete()
 
 executor.start_polling(dp, skip_updates=True, on_startup=on_startup)
