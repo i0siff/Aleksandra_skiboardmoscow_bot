@@ -5,6 +5,7 @@ import string
 import time 
 from aiogram import  Bot, types
 from aiogram.dispatcher import Dispatcher
+from aiogram.dispatcher import filters
 from aiogram.utils import executor
 from aiogram.types import ParseMode
 
@@ -171,6 +172,13 @@ async def new_members_handler(message : types.Message):
 # async def echo_send(message : types.Message):
 #     await message.answer(message.text)
 
+#Обработка хештегов для закрепления в ПИН
+@dp.message_handler((filters.HashTag('Катать') | filters.HashTag('катать') | filters.HashTag('Тренить') | filters.HashTag('тренить')), content_types=['text'])
+async def PIN_message(message : types.Message):
+    await bot.pin_chat_message(message.chat.id, message.message_id)
+    PIN_message_info = await message.reply("Закрепила в ПИН")
+    await asyncio.sleep(30)
+    await PIN_message_info.delete()
 
 @dp.message_handler()
 async def echo_send(message : types.Message):
@@ -180,5 +188,4 @@ async def echo_send(message : types.Message):
         await message.delete()
         await asyncio.sleep(30)
         await cenz_message.delete()
-
 executor.start_polling(dp, skip_updates=True, on_startup=on_startup)
